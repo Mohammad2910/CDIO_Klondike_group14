@@ -41,7 +41,7 @@ import org.tensorflow.lite.examples.detection.customview.OverlayView.DrawCallbac
 import org.tensorflow.lite.examples.detection.env.BorderedText;
 import org.tensorflow.lite.examples.detection.env.ImageUtils;
 import org.tensorflow.lite.examples.detection.env.Logger;
-import org.tensorflow.lite.examples.detection.tflite.Classifier;
+import org.tensorflow.lite.examples.detection.tflite.Detector;
 import org.tensorflow.lite.examples.detection.tflite.YoloV4Classifier;
 import org.tensorflow.lite.examples.detection.tracking.MultiBoxTracker;
 
@@ -67,7 +67,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
     OverlayView trackingOverlay;
     private Integer sensorOrientation;
 
-    private Classifier detector;
+    private Detector detector;
 
     private long lastProcessingTimeMs;
     private Bitmap rgbFrameBitmap = null;
@@ -186,7 +186,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                     public void run() {
                         LOGGER.i("Running detection on image " + currTimestamp);
                         final long startTime = SystemClock.uptimeMillis();
-                        final List<Classifier.Recognition> results = detector.recognizeImage(croppedBitmap);
+                        final List<Detector.Recognition> results = detector.recognizeImage(croppedBitmap);
                         lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
 
                         Log.e("CHECK", "run: " + results.size());
@@ -205,10 +205,10 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 break;
                         }
 
-                        final List<Classifier.Recognition> mappedRecognitions =
-                                new LinkedList<Classifier.Recognition>();
+                        final List<Detector.Recognition> mappedRecognitions =
+                                new LinkedList<Detector.Recognition>();
 
-                        for (final Classifier.Recognition result : results) {
+                        for (final Detector.Recognition result : results) {
                             final RectF location = result.getLocation();
                             if (location != null && result.getConfidence() >= minimumConfidence) {
                                 canvas.drawRect(location, paint);
@@ -216,6 +216,8 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 cropToFrameTransform.mapRect(location);
 
                                 result.setLocation(location);
+
+                                //todo --> her er jeres output (liste af detector.regenition objekter)
                                 mappedRecognitions.add(result);
                             }
                         }
