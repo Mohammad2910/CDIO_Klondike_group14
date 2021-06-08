@@ -1339,6 +1339,7 @@ drawable btn_radio_off_mtrl
 drawable btn_radio_off_to_on_mtrl_animation
 drawable btn_radio_on_mtrl
 drawable btn_radio_on_to_off_mtrl_animation
+drawable cam_solitaire_overlay_rotate
 drawable caret
 drawable chair
 drawable design_bottom_navigation_item_background
@@ -1472,6 +1473,7 @@ id bottom
 id bottom_sheet_arrow
 id bottom_sheet_layout
 id buttonPanel
+id cam_overlay
 id cameraButton
 id cancel_button
 id center
@@ -1689,7 +1691,6 @@ id time
 id title
 id titleDividerNoCustom
 id title_template
-id toolbar
 id top
 id topPanel
 id touch_outside
@@ -1770,6 +1771,7 @@ layout abc_search_view
 layout abc_select_dialog_material
 layout abc_tooltip
 layout activity_main
+layout cam_solitaire_overlay
 layout custom_dialog
 layout design_bottom_navigation_item
 layout design_bottom_sheet_dialog
