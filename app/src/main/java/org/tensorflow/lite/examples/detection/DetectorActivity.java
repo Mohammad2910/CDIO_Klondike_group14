@@ -167,7 +167,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
             return;
         }
         computingDetection = true;
-        LOGGER.i("Preparing image " + currTimestamp + " for detection in bg thread.");
+        //LOGGER.i("Preparing image " + currTimestamp + " for detection in bg thread.");
 
         rgbFrameBitmap.setPixels(getRgbBytes(), 0, previewWidth, 0, 0, previewWidth, previewHeight);
 
@@ -184,7 +184,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                 new Runnable() {
                     @Override
                     public void run() {
-                        LOGGER.i("Running detection on image " + currTimestamp);
+                        //LOGGER.i("Running detection on image " + currTimestamp);
                         final long startTime = SystemClock.uptimeMillis();
                         final List<Detector.Recognition> results = detector.recognizeImage(croppedBitmap);
                         lastProcessingTimeMs = SystemClock.uptimeMillis() - startTime;
@@ -206,7 +206,7 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                         }
 
                         final List<Detector.Recognition> mappedRecognitions =
-                                new LinkedList<Detector.Recognition>();
+                                new LinkedList<>();
 
                         for (final Detector.Recognition result : results) {
                             final RectF location = result.getLocation();
@@ -219,6 +219,15 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
 
                                 //todo --> her er jeres output (liste af detector.regenition objekter)
                                 mappedRecognitions.add(result);
+                                //System.out.println("ID: " + mappedRecognitions.get(0).getId() + " Title: " + mappedRecognitions.get(0).getTitle() + " Location: " + mappedRecognitions.get(0).getLocation());
+                            }
+                        }
+                        float[] locationHolder = new float[4];
+                        for (int i = 0; i < results.size(); i++) {
+                            System.out.println("ID: " + mappedRecognitions.get(i).getId() + " Title: " + mappedRecognitions.get(i).getTitle() + " Location: " + mappedRecognitions.get(i).getLocation());
+                            locationHolder = mappedRecognitions.get(i).getLocationFloats();
+                            for (int j = 0; j < 4; j++) {
+                                System.out.println(locationHolder[j]);
                             }
                         }
 
