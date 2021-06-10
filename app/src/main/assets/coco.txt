@@ -10,10 +10,10 @@ five_of_clubs
 five_of_diamonds
 five_of_hearts
 five_of_spades
-four_of_clubs
-four_of_diamonds
-four_of_hearts
-four_of_spades
+C4 four_of_clubs
+D4 four_of_diamonds
+H4 four_of_hearts
+S4
 jack_of_clubs
 jack_of_diamonds
 jack_of_hearts

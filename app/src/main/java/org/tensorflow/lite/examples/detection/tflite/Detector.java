@@ -97,6 +97,16 @@ public interface Detector {
             return new RectF(location);
         }
 
+        public float[] getLocationFloats(){
+            String stringOfFloats = getLocation().toString().substring(6,getLocation().toString().length()-1);
+            String[] locationString = stringOfFloats.split(",",0);
+            float[] locationArray = new float[4];
+            for (int i = 0; i < locationString.length; i++) {
+                locationArray[i] = Float.parseFloat(locationString[i]);
+            }
+            return locationArray;
+        }
+
         public void setLocation(RectF location) {
             this.location = location;
         }

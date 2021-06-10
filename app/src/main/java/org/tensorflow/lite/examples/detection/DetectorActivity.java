@@ -222,8 +222,13 @@ public class DetectorActivity extends CameraActivity implements OnImageAvailable
                                 //System.out.println("ID: " + mappedRecognitions.get(0).getId() + " Title: " + mappedRecognitions.get(0).getTitle() + " Location: " + mappedRecognitions.get(0).getLocation());
                             }
                         }
+                        float[] locationHolder = new float[4];
                         for (int i = 0; i < results.size(); i++) {
                             System.out.println("ID: " + mappedRecognitions.get(i).getId() + " Title: " + mappedRecognitions.get(i).getTitle() + " Location: " + mappedRecognitions.get(i).getLocation());
+                            locationHolder = mappedRecognitions.get(i).getLocationFloats();
+                            for (int j = 0; j < 4; j++) {
+                                System.out.println(locationHolder[j]);
+                            }
                         }
 
                         tracker.trackResults(mappedRecognitions, currTimestamp);
